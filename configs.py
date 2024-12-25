@@ -16,3 +16,6 @@ class DefaultConfig(object):
     # Log format
     LOG_FORMAT='%(asctime)s,%(msecs)d %(levelname)-2s [%(filename)s:%(lineno)d] %(req_id)s %(message)s'
 
+    # CORS configuration TODO 这里可能是列表形式 目前我看到的是列表和这种格式的字符串都可以
+    WEB_API_CORS_ALLOW_ORIGINS='http://127.0.0.1:3000,*'
+    CONSOLE_CORS_ALLOW_ORIGINS='http://127.0.0.1:3000,*'
