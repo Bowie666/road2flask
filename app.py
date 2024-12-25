@@ -58,9 +58,9 @@ def initialize_extensions(app: Flask):
     import time
 
     from extensions import (
+        ext_blueprints,
         ext_logging,
         # ext_app_metrics,
-        # ext_blueprints,
         # ext_celery,
         # ext_code_based_extension,
         # ext_commands,
@@ -81,6 +81,7 @@ def initialize_extensions(app: Flask):
     )
 
     extensions = [
+        ext_blueprints,
         ext_logging,
         # ext_timezone,
         # ext_warnings,
@@ -99,7 +100,6 @@ def initialize_extensions(app: Flask):
         # ext_hosting_provider,
         # ext_sentry,
         # ext_proxy_fix,
-        # ext_blueprints,
         # ext_commands,
     ]
     for ext in extensions:
@@ -122,6 +122,14 @@ app = create_app()
 initialize_extensions(app)
 # celery = app.extensions["celery"]
 
+
+@app.route('/url_map')
+def route_map():
+    """
+    主视图，返回所有视图网址
+    """
+    rules_iterator = app.url_map.iter_rules()
+    return {rule.endpoint: rule.rule for rule in rules_iterator if rule.endpoint not in ('route_map', 'static')}
 
 
 if __name__ == "__main__":
