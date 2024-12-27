@@ -13,12 +13,16 @@ i want to use flask clarity
 │       └── layout.html
 ├── models          # 模型文件
 ├── extensions      # 扩展
-│   ├── __init__.py
-│   └── db.py
-├── configs.py              # 先把配置文件放着 可以把这一块抽成文件夹
-├── requirements.txt        # python依赖
-├── app.py              # 入口
-└── commands.py         # 命令行代码 自定义初始化命令
+│   ├── ext_blueprint.py        # 蓝图的配置
+│   ├── ext_celery.py           # celery的配置 这里有点问题 就是看不到celery的运行状态 老是pending 数据库也看不到
+│   ├── ext_db.py               # 数据库的配置
+│   ├── ext_logging.py          # 日志的配置
+│   ├── ext_migrate.py          # 迁移的配置
+│   └── ext_redis.py            # redis的配置
+├── configs.py                  # 先把配置文件放着 可以把这一块抽成文件夹
+├── requirements.txt            # python依赖
+├── app.py                      # 入口
+└── commands.py                 # 命令行代码 自定义初始化命令
 ```
 
 ## tips
