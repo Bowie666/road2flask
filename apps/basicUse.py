@@ -1,5 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, current_app
 from flask_restful import Resource, Api, reqparse, inputs
+
+from tasks.time_task import long_task
+from celery.result import AsyncResult
 
 # TODO 有什么好的用法在补充吧
 basic_bp = Blueprint("basic", __name__)
@@ -8,6 +11,11 @@ basic_api = Api(basic_bp)
 
 class HelloWorldResource(Resource):
     def get(self):
+        redis_client = current_app.extensions["redis"]
+        # redis报错还是会正确返回
+        redis_client.set('key', '1')
+        print('write redis success')
+
         return {'hello': 'world'}
 
     def post(self):
@@ -46,5 +54,25 @@ class ParaResource(Resource):
         }
 
 
+class TiemTaskAPI(Resource):
+    def put(self, task_id):
+        tid = [task_id]
+        task = long_task.apply_async()  # 启动异步任务
+        return { 'task_id': task.id }
+
+    def get(self, task_id):
+        # task = long_task.AsyncResult(task_id)  # 获取任务状态
+        task = AsyncResult(task_id)  # 获取任务状态
+        return {
+            'task_id': task.id,
+            'status': task.status,
+            'result': task.result,
+            "ready": task.ready(),
+            "successful": task.successful(),
+            "value": task.result if task.ready() else None,
+        }
+
+
 basic_api.add_resource(HelloWorldResource, '/')
 basic_api.add_resource(ParaResource, '/para')
+basic_api.add_resource(TiemTaskAPI, '/task/<task_id>')
