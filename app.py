@@ -58,12 +58,13 @@ def initialize_extensions(app: Flask):
     import time
 
     from extensions import (
+        ext_celery,
         ext_blueprints,
         ext_db,
         ext_logging,
         ext_migrate,
+        ext_redis,
         # ext_app_metrics,
-        # ext_celery,
         # ext_code_based_extension,
         # ext_commands,
         # ext_compress,
@@ -72,7 +73,6 @@ def initialize_extensions(app: Flask):
         # ext_login,
         # ext_mail,
         # ext_proxy_fix,
-        # ext_redis,
         # ext_sentry,
         # ext_set_secretkey,
         # ext_storage,
@@ -81,10 +81,12 @@ def initialize_extensions(app: Flask):
     )
 
     extensions = [
+        ext_celery,
         ext_blueprints,
         ext_db,
         ext_logging,
         ext_migrate,
+        ext_redis,
         # ext_timezone,
         # ext_warnings,
         # ext_import_modules,
@@ -92,9 +94,7 @@ def initialize_extensions(app: Flask):
         # ext_compress,
         # ext_code_based_extension,
         # ext_app_metrics,
-        # ext_redis,
         # ext_storage,
-        # ext_celery,
         # ext_login,
         # ext_mail,
         # ext_hosting_provider,
@@ -120,7 +120,7 @@ def initialize_extensions(app: Flask):
 # create app
 app = create_app()
 initialize_extensions(app)
-# celery = app.extensions["celery"]
+celery = app.extensions["celery"]
 
 
 @app.route('/url_map')
