@@ -36,7 +36,9 @@ class ParaResource(Resource):
             # type=inputs.regex(r'^\d{2}&')  # 可用正则表达式检验参数
 
             help='Rate cannot be converted',   # 参数检验错误时返回的错误描述信息
+            required=True,
 
+            # reqparse 默认是将 location 设置为字符串而不是列表。你可以改为使用字符串 "headers" 而不是列表。
             # location='args',  # 参数存放的位置
             location=['args', 'cookies', 'headers', 'json', 'files', 'form'],  # 参数存放的位置 可指定多个
 
@@ -75,4 +77,4 @@ class TiemTaskAPI(Resource):
 
 basic_api.add_resource(HelloWorldResource, '/')
 basic_api.add_resource(ParaResource, '/para')
-basic_api.add_resource(TiemTaskAPI, '/task/<task_id>')
+basic_api.add_resource(TiemTaskAPI, '/task/<int:task_id>')
