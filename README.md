@@ -1,5 +1,6 @@
 # road2flask
 i want to use flask clarity
+以后慢慢添加restful db用法
 
 
 ## structure
