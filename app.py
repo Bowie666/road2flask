@@ -60,6 +60,7 @@ def initialize_extensions(app: Flask):
     from extensions import (
         # ext_apscheduler,  # 用时打开即可
         ext_celery,
+        ext_commands,
         ext_blueprints,
         ext_db,
         ext_logging,
@@ -67,7 +68,6 @@ def initialize_extensions(app: Flask):
         ext_redis,
         # ext_app_metrics,
         # ext_code_based_extension,
-        # ext_commands,
         # ext_compress,
         # ext_hosting_provider,
         # ext_import_modules,
@@ -84,6 +84,7 @@ def initialize_extensions(app: Flask):
     extensions = [
         # ext_apscheduler,  # 用时打开即可
         ext_celery,
+        ext_commands,
         ext_blueprints,
         ext_db,
         ext_logging,
@@ -102,7 +103,6 @@ def initialize_extensions(app: Flask):
         # ext_hosting_provider,
         # ext_sentry,
         # ext_proxy_fix,
-        # ext_commands,
     ]
     for ext in extensions:
         short_name = ext.__name__.split(".")[-1]
