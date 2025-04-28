@@ -10,7 +10,7 @@ from flask import Flask
 @click.option("--user", prompt=True, help="Who")
 @click.option("--text1", prompt=True, help="First text")
 @click.option("--text2", prompt=True, help="Second text")
-def reset_password(user, text1, text2):
+def reset_txt(user, text1, text2):
     if str(text1).strip() != str(text2).strip():
         click.echo(click.style("Text do not match.", fg="red"))
         return
@@ -25,7 +25,7 @@ def reset_password(user, text1, text2):
 
 def init_app(app: Flask):
     cmds_to_register = [
-        reset_password,
+        reset_txt,
     ]
     for cmd in cmds_to_register:
         app.cli.add_command(cmd)
