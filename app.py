@@ -58,6 +58,7 @@ def initialize_extensions(app: Flask):
     import time
 
     from extensions import (
+        # ext_apscheduler,  # 用时打开即可
         ext_celery,
         ext_blueprints,
         ext_db,
@@ -81,6 +82,7 @@ def initialize_extensions(app: Flask):
     )
 
     extensions = [
+        # ext_apscheduler,  # 用时打开即可
         ext_celery,
         ext_blueprints,
         ext_db,
